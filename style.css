@@ -1,23 +1,140 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #FAF3E0; /* Warna pastel krem */
+    color: #333; /* Teks hitam abu-abu */
     margin: 20px;
+    padding: 0;
+    line-height: 1.6;
   }
   
-  input[type="text"], input[type="number"] {
+  /* Header Styles */
+  h1 {
+    color: #FFADAD; /* Pastel pink */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2, h3 {
+    color: #9FD8DF; /* Pastel teal */
+    margin-top: 20px;
+  }
+  
+  /* Form and Input Styles */
+  input[type="text"],
+  input[type="number"] {
+    padding: 10px;
     margin: 5px;
+    border: 1px solid #C2EABD; /* Warna pastel hijau muda */
+    border-radius: 5px;
+    background-color: #FFECB5; /* Pastel kuning muda */
   }
   
   button {
-    margin: 5px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #FFADAD; /* Pastel pink */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #FFBFAF; /* Warna pink pastel lebih terang */
+  }
+  
+  /* Daftar Barang Tersedia */
+  #availableItems {
+    padding: 15px;
+    background-color: #C2EABD; /* Pastel hijau muda */
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #availableItems div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Input Jumlah */
+  input[type="number"]:disabled {
+    background-color: #E0E7FF; /* Pastel biru muda */
+    cursor: not-allowed;
+  }
+  
+  /* Checkbox Styles */
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Receipt Styles */
+  #receipt {
+    padding: 20px;
+    background-color: #FFEDDA; /* Pastel oranye muda */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   ul {
     list-style-type: none;
+    padding-left: 0;
   }
   
   li {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #C2EABD; /* Pastel hijau muda */
+    border-radius: 5px;
+  }
+  
+  /* Subtotal, Discount, Total Styles */
+  p {
+    font-size: 1.1em;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  p:nth-child(2) {
+    background-color: #FFADAD; /* Pastel pink */
+    border-radius: 5px;
+    color: #fff;
+  }
+  
+  p:last-child {
+    background-color: #9FD8DF; /* Pastel teal */
+    border-radius: 5px;
+    color: #fff;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 600px) {
+    body {
+      margin: 10px;
+    }
+  
+    button {
+      padding: 8px 16px;
+    }
+  
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    #availableItems {
+      padding: 10px;
+    }
+  
+    #receipt {
+      padding: 15px;
+    }
+  
+    p {
+      font-size: 1em;
+    }
   }
   

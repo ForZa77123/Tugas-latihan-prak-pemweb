@@ -4,25 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang Belanja Interaktif</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Keranjang Belanja</h1>
   
+  <h2>Daftar Barang Tersedia</h2>
+  <div id="availableItems"></div>
+
+  <h2>Tambah Barang Baru</h2>
   <div>
-    <input type="text" id="itemName" placeholder="Nama Barang">
-    <input type="number" id="itemPrice" placeholder="Harga Barang">
-    <button onclick="addItem()">Tambah Barang</button>
+    <input type="text" id="newItemName" placeholder="Nama Barang">
+    <input type="number" id="newItemPrice" placeholder="Harga Barang">
+    <button onclick="addNewItem()">Tambah Barang</button>
   </div>
-  
-  <h2>Daftar Barang</h2>
-  <ul id="itemList"></ul>
-  
-  <div>
-    <p>Subtotal: Rp <span id="subtotal">0</span></p>
-    <p>Diskon: Rp <span id="discount">0</span></p>
-    <p>Total: Rp <span id="total">0</span></p>
-  </div>
+
+  <h2>Struk Belanja</h2>
+  <div id="receipt"></div>
 
   <script src="script.js"></script>
 </body>

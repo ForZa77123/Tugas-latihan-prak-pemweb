@@ -1,75 +1,140 @@
-// Inisialisasi array untuk menyimpan barang
-let cartItems = [];
-
-// Fungsi untuk menambahkan barang ke keranjang
-function addItem() {
-  const itemName = document.getElementById('itemName').value;
-  const itemPrice = parseFloat(document.getElementById('itemPrice').value);
+// Daftar barang awal
+let availableItems = [
+    { name: "Baju", price: 100000 },
+    { name: "Celana", price: 150000 },
+    { name: "Sepatu", price: 300000 },
+    { name: "Topi", price: 50000 },
+  ];
+  let selectedItems = [];
   
-  if (!itemName || isNaN(itemPrice) || itemPrice <= 0) {
-    alert("Nama dan harga barang harus valid.");
-    return;
-  }
-
-  // Tambahkan barang ke array
-  cartItems.push({ name: itemName, price: itemPrice });
+  // Fungsi untuk menampilkan daftar barang yang tersedia
+  function displayAvailableItems() {
+    const availableItemsDiv = document.getElementById('availableItems');
+    availableItemsDiv.innerHTML = ''; // Kosongkan konten sebelumnya
   
-  // Reset input
-  document.getElementById('itemName').value = '';
-  document.getElementById('itemPrice').value = '';
-
-  // Tampilkan barang dan update subtotal
-  renderItems();
-  updateTotals();
-}
-
-// Fungsi untuk menghapus barang dari keranjang
-function removeItem(index) {
-  cartItems.splice(index, 1); // Hapus barang dari array
-  renderItems(); // Render ulang daftar barang
-  updateTotals(); // Update total
-}
-
-// Fungsi untuk menampilkan barang di daftar
-function renderItems() {
-  const itemList = document.getElementById('itemList');
-  itemList.innerHTML = ''; // Kosongkan daftar sebelumnya
-
-  cartItems.forEach((item, index) => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${item.name}: Rp ${item.price.toFixed(2)}`;
-
-    // Tombol hapus barang
-    const removeButton = document.createElement('button');
-    removeButton.textContent = "Hapus";
-    removeButton.onclick = () => removeItem(index);
-
-    listItem.appendChild(removeButton);
-    itemList.appendChild(listItem);
-  });
-}
-
-// Fungsi untuk menghitung subtotal, diskon, dan total
-function updateTotals() {
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+    availableItems.forEach((item, index) => {
+      const itemDiv = document.createElement('div');
+      
+      // Checkbox untuk memilih barang
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = `item-${index}`;
+      checkbox.value = item.name;
+      checkbox.onchange = () => toggleSelectItem(index);
   
-  // Aturan diskon
-  let discount = 0;
-  if (subtotal > 2000000) {
-    discount = subtotal * 0.15;
-  } else if (subtotal > 1000000) {
-    discount = subtotal * 0.10;
+      // Label nama barang dan harga
+      const label = document.createElement('label');
+      label.htmlFor = `item-${index}`;
+      label.textContent = `${item.name} - Rp ${item.price.toFixed(2)}`;
+  
+      // Input untuk jumlah barang
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'number';
+      quantityInput.min = 1;
+      quantityInput.value = 1;
+      quantityInput.id = `quantity-${index}`;
+      quantityInput.oninput = () => updateQuantity(index, quantityInput.value);
+      quantityInput.disabled = true;
+  
+      itemDiv.appendChild(checkbox);
+      itemDiv.appendChild(label);
+      itemDiv.appendChild(quantityInput);
+      availableItemsDiv.appendChild(itemDiv);
+    });
   }
-
-  // Diskon tambahan untuk lebih dari 5 barang
-  if (cartItems.length > 5) {
-    discount += subtotal * 0.05;
+  
+  // Fungsi untuk toggle pemilihan barang
+  function toggleSelectItem(index) {
+    const checkbox = document.getElementById(`item-${index}`);
+    const quantityInput = document.getElementById(`quantity-${index}`);
+  
+    if (checkbox.checked) {
+      selectedItems.push({ ...availableItems[index], quantity: 1 });
+      quantityInput.disabled = false;
+    } else {
+      selectedItems = selectedItems.filter(item => item.name !== availableItems[index].name);
+      quantityInput.disabled = true;
+    }
+    updateReceipt();
   }
-
-  const total = subtotal - discount;
-
-  // Update tampilan subtotal, diskon, dan total
-  document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-  document.getElementById('discount').textContent = discount.toFixed(2);
-  document.getElementById('total').textContent = total.toFixed(2);
-}
+  
+  // Fungsi untuk memperbarui jumlah barang yang dipilih
+  function updateQuantity(index, quantity) {
+    const selectedItem = selectedItems.find(item => item.name === availableItems[index].name);
+    if (selectedItem) {
+      selectedItem.quantity = parseInt(quantity);
+      updateReceipt();
+    }
+  }
+  
+  // Fungsi untuk menambahkan barang baru
+  function addNewItem() {
+    const name = document.getElementById('newItemName').value.trim();
+    const price = parseFloat(document.getElementById('newItemPrice').value);
+  
+    if (!name || isNaN(price) || price <= 0) {
+      alert("Nama dan harga barang harus valid.");
+      return;
+    }
+  
+    // Cek apakah barang sudah ada
+    if (availableItems.some(item => item.name.toLowerCase() === name.toLowerCase())) {
+      alert("Barang dengan nama yang sama sudah ada.");
+      return;
+    }
+  
+    // Tambahkan barang ke daftar
+    availableItems.push({ name, price });
+    document.getElementById('newItemName').value = '';
+    document.getElementById('newItemPrice').value = '';
+    displayAvailableItems(); // Refresh daftar barang
+  }
+  
+  // Fungsi untuk memperbarui struk belanja
+  function updateReceipt() {
+    const receiptDiv = document.getElementById('receipt');
+    receiptDiv.innerHTML = ''; // Kosongkan struk sebelumnya
+  
+    let subtotal = 0;
+    const receiptList = document.createElement('ul');
+  
+    selectedItems.forEach(item => {
+      const totalItemPrice = item.price * item.quantity;
+      subtotal += totalItemPrice;
+  
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item.name} - ${item.quantity} x Rp ${item.price.toFixed(2)} = Rp ${totalItemPrice.toFixed(2)}`;
+      receiptList.appendChild(listItem);
+    });
+  
+    receiptDiv.appendChild(receiptList);
+  
+    // Hitung diskon
+    let discount = 0;
+    if (subtotal > 2000000) {
+      discount = subtotal * 0.15;
+    } else if (subtotal > 1000000) {
+      discount = subtotal * 0.10;
+    }
+    if (selectedItems.reduce((sum, item) => sum + item.quantity, 0) > 5) {
+      discount += subtotal * 0.05;
+    }
+  
+    const total = subtotal - discount;
+  
+    // Tampilkan subtotal, diskon, dan total
+    const subtotalElement = document.createElement('p');
+    subtotalElement.textContent = `Subtotal: Rp ${subtotal.toFixed(2)}`;
+    const discountElement = document.createElement('p');
+    discountElement.textContent = `Diskon: Rp ${discount.toFixed(2)}`;
+    const totalElement = document.createElement('p');
+    totalElement.textContent = `Total: Rp ${total.toFixed(2)}`;
+  
+    receiptDiv.appendChild(subtotalElement);
+    receiptDiv.appendChild(discountElement);
+    receiptDiv.appendChild(totalElement);
+  }
+  
+  // Inisialisasi tampilan awal
+  displayAvailableItems();
+  
