@@ -1,8 +1,8 @@
 /* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #FAF3E0; /* Warna pastel krem */
-    color: #333; /* Teks hitam abu-abu */
+    background-color: #FAF3E0;
+    color: #292828;
     margin: 20px;
     padding: 0;
     line-height: 1.6;
@@ -10,13 +10,13 @@ body {
   
   /* Header Styles */
   h1 {
-    color: #FFADAD; /* Pastel pink */
+    color: #FFADAD;
     text-align: center;
     margin-bottom: 20px;
   }
   
   h2, h3 {
-    color: #9FD8DF; /* Pastel teal */
+    color: #9FD8DF; 
     margin-top: 20px;
   }
   
@@ -25,15 +25,15 @@ body {
   input[type="number"] {
     padding: 10px;
     margin: 5px;
-    border: 1px solid #C2EABD; /* Warna pastel hijau muda */
+    border: 1px solid #C2EABD;
     border-radius: 5px;
-    background-color: #FFECB5; /* Pastel kuning muda */
+    background-color: #FFECB5; 
   }
   
   button {
     padding: 10px 20px;
     margin: 10px 0;
-    background-color: #FFADAD; /* Pastel pink */
+    background-color: #FFADAD;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -42,13 +42,13 @@ body {
   }
   
   button:hover {
-    background-color: #FFBFAF; /* Warna pink pastel lebih terang */
+    background-color: #FFBFAF;
   }
   
   /* Daftar Barang Tersedia */
   #availableItems {
     padding: 15px;
-    background-color: #C2EABD; /* Pastel hijau muda */
+    background-color: #C2EABD; 
     border-radius: 10px;
     margin-bottom: 20px;
   }
@@ -61,7 +61,7 @@ body {
   
   /* Input Jumlah */
   input[type="number"]:disabled {
-    background-color: #E0E7FF; /* Pastel biru muda */
+    background-color: #E0E7FF; 
     cursor: not-allowed;
   }
   
@@ -73,7 +73,7 @@ body {
   /* Receipt Styles */
   #receipt {
     padding: 20px;
-    background-color: #FFEDDA; /* Pastel oranye muda */
+    background-color: #FFEDDA; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -86,7 +86,7 @@ body {
   li {
     margin-bottom: 10px;
     padding: 5px;
-    background-color: #C2EABD; /* Pastel hijau muda */
+    background-color: #C2EABD;
     border-radius: 5px;
   }
   
@@ -98,13 +98,13 @@ body {
   }
   
   p:nth-child(2) {
-    background-color: #FFADAD; /* Pastel pink */
+    background-color: #FFADAD; 
     border-radius: 5px;
     color: #fff;
   }
   
   p:last-child {
-    background-color: #9FD8DF; /* Pastel teal */
+    background-color: #9FD8DF;
     border-radius: 5px;
     color: #fff;
   }
