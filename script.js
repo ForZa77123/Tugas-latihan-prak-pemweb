@@ -88,6 +88,10 @@ let availableItems = [
     document.getElementById('newItemName').value = '';
     document.getElementById('newItemPrice').value = '';
     displayAvailableItems(); // Refresh daftar barang
+
+    alert(
+        `Barang "${name}" berhasil ditambahkan. Harga: Rp ${price.toFixed(2)}`
+      );
   }
   
   // Fungsi untuk memperbarui struk belanja
